@@ -1,5 +1,5 @@
 --!nonstrict
--- rbw bar widget — the [[widget]] entry.
+-- rbw-enhanced bar widget — the [[widget]] entry.
 --
 -- A lock glyph colored by the vault state. Left click opens the panel, right
 -- click locks an unlocked vault and unlocks a locked one.
@@ -35,7 +35,7 @@ local function render()
   barWidget.setVisible(not (state == "unlocked" and noctalia.getConfig("hide_when_unlocked") == true))
   barWidget.render(ui.glyph({ name = look.glyph, color = look.color }))
 
-  local rows = { { key = "rbw", value = noctalia.tr(`state.{state}`) } }
+  local rows = { { key = "rbw-enhanced", value = noctalia.tr(`state.{state}`) } }
   if snapshot and snapshot.lastSync then
     table.insert(rows, {
       key = noctalia.tr("tooltip.synced"),
@@ -55,7 +55,7 @@ function update()
 end
 
 function onClick()
-  noctalia.togglePanel("rylos/rbw:panel")
+  noctalia.togglePanel("rylos/rbw-enhanced:panel")
 end
 
 function onRightClick()

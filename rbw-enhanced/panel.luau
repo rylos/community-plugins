@@ -1,5 +1,5 @@
 --!nonstrict
--- rbw panel — the [[panel]] entry.
+-- rbw-enhanced panel — the [[panel]] entry.
 --
 -- The vault state and how it unlocks, then the actions: open rbw tui,
 -- unlock or lock, sync, and the security settings (rbw tui --settings).

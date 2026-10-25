@@ -1,5 +1,5 @@
 --!nonstrict
--- rbw poller — the headless [[service]] entry.
+-- rbw-enhanced poller — the headless [[service]] entry.
 --
 -- Runs `rbw status --json` every poll_interval seconds and publishes a small
 -- snapshot under "rbw.snapshot". `rbw status` never starts the agent, never
@@ -66,8 +66,8 @@ local function poll()
     end
     local status = noctalia.json.decode(result.stdout)
     if type(status) ~= "table" then
-      -- an rbw without `status --json` (the upstream client) prints usage
-      publish({ state = "error", detail = "rbw status --json is not supported by this rbw" })
+      -- the upstream rbw has no `status --json` and prints usage instead
+      publish({ state = "error", detail = noctalia.tr("panel.not-enhanced") })
       return
     end
     publish({
@@ -96,7 +96,7 @@ local function run(args, okMessage)
       noctalia.notifyError(noctalia.tr("notify.failed", { command = `rbw {table.concat(args, " ")}` }),
         detail ~= "" and detail or nil)
     elseif okMessage then
-      noctalia.notify("rbw", noctalia.tr(okMessage))
+      noctalia.notify("rbw-enhanced", noctalia.tr(okMessage))
     end
     poll()
   end)

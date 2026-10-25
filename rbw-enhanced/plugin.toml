@@ -1,10 +1,11 @@
-# rbw — Bitwarden vault status for the bar, through the rbw command line client.
+# rbw-enhanced — Bitwarden vault status for the bar, through rbw-enhanced (the
+# rylos/rbw fork of the rbw command line client).
 # The service polls `rbw status --json` (which never starts the agent or asks
 # for anything); the widget shows whether the vault is unlocked, and the panel
 # unlocks, locks, syncs and opens `rbw tui` in a terminal.
 
-id = "rylos/rbw"
-name = "rbw"
+id = "rylos/rbw-enhanced"
+name = "rbw-enhanced"
 version = "1.0.0"
 plugin_api = 34
 author = "Marco Ziliani"
@@ -12,7 +13,7 @@ license = "MIT"
 dependencies = ["rbw"]
 tags = ["bar", "panel", "service", "privacy", "utility"]
 icon = "lock"
-description = "Bitwarden vault status for rbw: see if it is unlocked, then unlock, lock, sync or open rbw tui."
+description = "Bitwarden vault status for rbw-enhanced: see if it is unlocked, then unlock, lock, sync or open rbw tui."
 
 # ── Plugin-level settings ────────────────────────────────────────────────────
 

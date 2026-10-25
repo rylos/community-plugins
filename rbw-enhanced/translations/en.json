@@ -9,6 +9,7 @@
     "lock": "Lock",
     "login": "Log in",
     "never-synced": "Never synced",
+    "not-enhanced": "This rbw has no `rbw status --json`: the plugin needs rbw-enhanced.",
     "not-installed": "rbw is not installed, or not on PATH. Set its path in the plugin settings.",
     "open": "Open vault (rbw tui)",
     "settings": "Security settings",
@@ -43,7 +44,7 @@
     "expired": "Login expired",
     "locked": "Locked",
     "logged-out": "Not logged in",
-    "not-installed": "rbw not found",
+    "not-installed": "rbw-enhanced not found",
     "stopped": "Locked (agent not running)",
     "unlocked": "Unlocked"
   },

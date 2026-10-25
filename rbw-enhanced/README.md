@@ -1,33 +1,33 @@
-# rbw
+# rbw-enhanced
 
-Shows in the bar whether your Bitwarden vault is unlocked in [rbw](https://github.com/rylos/rbw), the command line
-Bitwarden client with a background agent, and gives you one click to unlock, lock, sync or open the vault in
-`rbw tui`.
+Shows in the bar whether your Bitwarden vault is unlocked in
+[rbw-enhanced](https://github.com/rylos/rbw), a fork of the rbw command line Bitwarden client, and gives you one
+click to unlock, lock, sync or open the vault in `rbw tui`.
 
 ## Plugin
 
 | Field | Value |
 | --- | --- |
-| ID | `rylos/rbw` |
+| ID | `rylos/rbw-enhanced` |
 | Entries | Bar widget: `bar`; panel: `panel`; service: `poller` |
 
 ## Requirements
 
-Install `rbw` on `PATH` (or set its path in the plugin settings). The plugin needs the commands `rbw status --json` and
-`rbw tui`, which come from the [rylos/rbw](https://github.com/rylos/rbw) fork; the upstream rbw doesn't have them, and
-the panel then reports the error.
+Install rbw-enhanced (AUR: `rbw-enhanced`, source: [rylos/rbw](https://github.com/rylos/rbw)), which provides the
+`rbw` command, on `PATH` (or set its path in the plugin settings). The plugin needs `rbw status --json` and `rbw tui`:
+the upstream rbw doesn't have them, and the panel then says so.
 
 You need to be logged in once (`rbw login` in a terminal). Unlocking uses whatever rbw is set up for: the pinentry
 for the master password, a PIN, or system authentication (face or fingerprint through polkit).
 
 ## Usage
 
-Add the **rbw** widget to a bar in Settings. Its lock glyph shows the vault state:
+Add the **rbw-enhanced** widget to a bar in Settings. Its lock glyph shows the vault state:
 
 - open lock: unlocked;
 - closed lock: locked (dimmer when the agent isn't running);
 - lock with an exclamation mark: the login expired and the agent can no longer sync;
-- crossed lock: not logged in, or rbw not found.
+- crossed lock: not logged in, or rbw-enhanced not found.
 
 Left click opens the panel. Right click locks an unlocked vault, unlocks a locked one, and opens `rbw login` in a
 terminal when the login expired.
@@ -44,7 +44,7 @@ The panel shows the state, the last sync and how the next unlock will go, with t
 Open the panel from a keybind or script with:
 
 ```sh
-noctalia msg panel-toggle rylos/rbw:panel
+noctalia msg panel-toggle rylos/rbw-enhanced:panel
 ```
 
 ## Settings
@@ -60,11 +60,11 @@ noctalia msg panel-toggle rylos/rbw:panel
 The service answers the same commands the panel sends:
 
 ```sh
-noctalia msg plugin rylos/rbw:poller all unlock
-noctalia msg plugin rylos/rbw:poller all lock
-noctalia msg plugin rylos/rbw:poller all sync
-noctalia msg plugin rylos/rbw:poller all tui
-noctalia msg plugin rylos/rbw:poller all refresh
+noctalia msg plugin rylos/rbw-enhanced:poller all unlock
+noctalia msg plugin rylos/rbw-enhanced:poller all lock
+noctalia msg plugin rylos/rbw-enhanced:poller all sync
+noctalia msg plugin rylos/rbw-enhanced:poller all tui
+noctalia msg plugin rylos/rbw-enhanced:poller all refresh
 ```
 
 `settings` and `login` open `rbw tui --settings` and `rbw login` in a terminal.
