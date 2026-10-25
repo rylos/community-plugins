@@ -29,8 +29,8 @@ Add the **rbw-enhanced** widget to a bar in Settings. Its lock glyph shows the v
 - lock with an exclamation mark: the login expired and the agent can no longer sync;
 - crossed lock: not logged in, or rbw-enhanced not found.
 
-Left click opens the panel. Right click locks an unlocked vault, unlocks a locked one, and opens `rbw login` in a
-terminal when the login expired.
+Left click opens the panel. Right click opens `rbw tui` in a terminal (`rbw login` when the login expired); the tui
+unlocks a locked vault itself.
 
 The panel shows the state, the last sync and how the next unlock will go, with these buttons:
 

@@ -2,7 +2,7 @@
 -- rbw-enhanced bar widget — the [[widget]] entry.
 --
 -- A lock glyph colored by the vault state. Left click opens the panel, right
--- click locks an unlocked vault and unlocks a locked one.
+-- click opens `rbw tui` (or `rbw login` when the login expired).
 
 local snapshot = nil
 
@@ -60,11 +60,10 @@ end
 
 function onRightClick()
   local state = stateOf()
-  if state == "unlocked" then
-    sendCmd("lock")
-  elseif state == "locked" or state == "stopped" then
-    sendCmd("unlock")
-  elseif state == "expired" or state == "logged-out" then
+  if state == "expired" or state == "logged-out" then
     sendCmd("login")
+  elseif state ~= "not-installed" then
+    -- the tui unlocks a locked vault itself
+    sendCmd("tui")
   end
 end
