@@ -6,7 +6,7 @@
 
 id = "rylos/rbw-enhanced"
 name = "rbw-enhanced"
-version = "1.1.1"
+version = "1.1.2"
 plugin_api = 34
 author = "Marco Ziliani"
 license = "MIT"
@@ -55,7 +55,7 @@ entry = "bar.luau"
 id = "panel"
 entry = "panel.luau"
 width = 340
-height = 330
+height = 285
 placement = "attached"
 position = "auto"
 open_near_click = true

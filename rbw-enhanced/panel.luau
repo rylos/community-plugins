@@ -6,7 +6,7 @@
 -- Everything runs in the service; the panel only sends commands.
 
 -- Must match height = … in the [[panel]] entry of plugin.toml
-local PANEL_HEIGHT = 330
+local PANEL_HEIGHT = 285
 
 local snapshot = nil
 local isOpen = false
