@@ -34,11 +34,11 @@ unlocks a locked vault itself.
 
 The panel shows the state, the last sync and how the next unlock will go, with these buttons:
 
-- **Open vault (rbw tui)**: opens `rbw tui` in your terminal, to search and copy entries.
+- **Open vault**: opens `rbw tui` in your terminal, to search, copy and type entries (the right click on the bar does the same).
 - **Unlock** / **Lock**: runs `rbw unlock` or `rbw lock`. Unlocking shows rbw's own prompt: the polkit dialog, the
   PIN or the master password.
 - **Sync**: runs `rbw sync`.
-- **Security settings**: opens `rbw tui --settings` (session timeout, timeout action, PIN, system authentication).
+- **Settings**: opens `rbw tui --settings` (session timeout, timeout action, PIN, system authentication).
 - **Log in**, when needed: opens `rbw login` in a terminal.
 
 Open the panel from a keybind or script with:

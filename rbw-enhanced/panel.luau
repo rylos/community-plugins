@@ -147,13 +147,11 @@ local function actions()
   end
 
   local unlocked = state == "unlocked"
+  -- all the same weight: the right click on the bar already opens the vault
   local children = {
-    ui.button({
-      text = tr("panel.open"),
-      glyph = "terminal-2",
-      variant = "primary",
-      contentAlign = "start",
-      onClick = "onTui",
+    ui.row({ gap = 8 }, {
+      ui.button({ text = tr("panel.open"), glyph = "terminal-2", flexGrow = 1, onClick = "onTui" }),
+      ui.button({ text = tr("panel.settings"), glyph = "shield-lock", flexGrow = 1, onClick = "onSettings" }),
     }),
     ui.row({ gap = 8 }, {
       ui.button({
@@ -170,13 +168,6 @@ local function actions()
         tooltip = if unlocked then nil else tr("panel.sync-locked"),
         onClick = "onSync",
       }),
-    }),
-    ui.button({
-      text = tr("panel.settings"),
-      glyph = "shield-lock",
-      variant = "ghost",
-      contentAlign = "start",
-      onClick = "onSettings",
     }),
   }
   return ui.column({ gap = 8 }, children)

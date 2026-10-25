@@ -12,7 +12,7 @@
     "not-enhanced": "This rbw has no `rbw status --json`: the plugin needs rbw-enhanced.",
     "not-installed": "rbw is not installed, or not on PATH. Set its path in the plugin settings.",
     "open": "Open vault",
-    "settings": "Security settings",
+    "settings": "Settings",
     "sync": "Sync",
     "sync-locked": "Unlock first",
     "synced-days": "Synced {value} days ago",
