@@ -71,6 +71,7 @@ local function header()
   local state = stateOf()
   local g = GLYPHS[state] or GLYPHS.error
   local lines = {
+    ui.label({ text = tr("panel.title"), fontSize = 11, color = "on_surface/0.6" }),
     ui.label({ text = tr(`state.{state}`), fontWeight = "bold", fontSize = 15 }),
   }
   if state == "error" and snapshot and snapshot.detail then

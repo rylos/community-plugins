@@ -5,8 +5,8 @@
   },
   "panel": {
     "expired-hint": "The login expired and the agent can no longer sync. Log in again in a terminal (two factor code).",
-    "logged-out-hint": "rbw is not logged in. Log in in a terminal.",
     "lock": "Lock",
+    "logged-out-hint": "rbw is not logged in. Log in in a terminal.",
     "login": "Log in",
     "never-synced": "Never synced",
     "not-enhanced": "This rbw has no `rbw status --json`: the plugin needs rbw-enhanced.",
@@ -19,6 +19,7 @@
     "synced-hours": "Synced {value} h ago",
     "synced-minutes": "Synced {value} min ago",
     "synced-now": "Synced just now",
+    "title": "Bitwarden vault (rbw-enhanced)",
     "unlock": "Unlock",
     "unlock-with-both": "Unlocks with system authentication or the PIN",
     "unlock-with-password": "Unlocks with the master password",
