@@ -6,7 +6,7 @@
 -- Everything runs in the service; the panel only sends commands.
 
 -- Must match height = … in the [[panel]] entry of plugin.toml
-local PANEL_HEIGHT = 250
+local PANEL_HEIGHT = 330
 
 local snapshot = nil
 local isOpen = false
@@ -67,13 +67,37 @@ local function unlockText()
   return tr("panel.unlock-with-password")
 end
 
+-- the state as a small colored pill next to the title
+local CHIP = {
+  unlocked = { "primary/0.18", "primary" },
+  expired = { "error/0.15", "error" },
+  ["logged-out"] = { "error/0.15", "error" },
+  error = { "error/0.15", "error" },
+}
+
+local function chip(state)
+  local c = CHIP[state] or { "surface_variant", "on_surface/0.8" }
+  return ui.row({ padding = 4, radius = 8, fill = c[1] }, {
+    ui.label({ text = tr(`state.{state}`), fontSize = 11, fontWeight = "bold", color = c[2] }),
+  })
+end
+
 local function header()
   local state = stateOf()
   local g = GLYPHS[state] or GLYPHS.error
+  local account = snapshot and snapshot.email
+  if account and snapshot.server then
+    account = `{account} · {snapshot.server}`
+  end
   local lines = {
-    ui.label({ text = tr("panel.title"), fontSize = 11, color = "on_surface/0.6" }),
-    ui.label({ text = tr(`state.{state}`), fontWeight = "bold", fontSize = 15 }),
+    ui.row({ gap = 8, align = "center" }, {
+      ui.label({ text = "Bitwarden", fontWeight = "bold", fontSize = 15 }),
+      chip(state),
+    }),
   }
+  if account then
+    table.insert(lines, ui.label({ text = account, fontSize = 11, color = "on_surface/0.7", maxLines = 1 }))
+  end
   if state == "error" and snapshot and snapshot.detail then
     table.insert(lines, ui.label({ text = snapshot.detail, fontSize = 11, color = "error", maxLines = 3 }))
   elseif state ~= "not-installed" then
@@ -84,6 +108,29 @@ local function header()
       ui.glyph({ name = g[1], size = 22, color = g[2] }),
     }),
     ui.column({ gap = 2, flexGrow = 1 }, lines),
+  })
+end
+
+-- how the vault opens: at login, and for the tui
+local function securityBox()
+  if not snapshot or snapshot.state == "not-installed" then
+    return nil
+  end
+  local unlock
+  if snapshot.autoUnlock then
+    unlock = tr("panel.unlock-auto")
+  else
+    unlock = unlockText()
+  end
+  local row = function(glyph, text)
+    return ui.row({ gap = 8, align = "center" }, {
+      ui.glyph({ name = glyph, size = 14, color = "on_surface/0.6" }),
+      ui.label({ text = text, fontSize = 11, color = "on_surface/0.8", maxLines = 2, flexGrow = 1 }),
+    })
+  end
+  return ui.column({ gap = 6, padding = 10, radius = 10, fill = "surface_variant/0.5" }, {
+    row("key", unlock),
+    row("terminal-2", tr(snapshot.tuiAuth and "panel.tui-auth" or "panel.tui-open")),
   })
 end
 
@@ -132,9 +179,6 @@ local function actions()
       onClick = "onSettings",
     }),
   }
-  if not unlocked then
-    table.insert(children, 1, ui.label({ text = unlockText(), fontSize = 11, color = "on_surface/0.6" }))
-  end
   return ui.column({ gap = 8 }, children)
 end
 
@@ -142,11 +186,13 @@ local function render()
   if not isOpen then
     return
   end
-  panel.render(ui.column({ gap = 16, padding = 16, height = PANEL_HEIGHT }, {
-    header(),
-    ui.separator({}),
-    actions(),
-  }))
+  local children = { header() }
+  local box = securityBox()
+  if box then
+    table.insert(children, box)
+  end
+  table.insert(children, actions())
+  panel.render(ui.column({ gap = 14, padding = 16, height = PANEL_HEIGHT }, children))
 end
 
 noctalia.state.watch("rbw.snapshot", function(encoded)

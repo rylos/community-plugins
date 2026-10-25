@@ -76,6 +76,10 @@ local function poll()
       pin = status.pin == true,
       systemAuth = status.system_auth == true,
       lastSync = status.last_sync,
+      email = status.email,
+      server = status.server,
+      autoUnlock = status.auto_unlock == true,
+      tuiAuth = status.tui_auth == true,
     })
   end)
   if not accepted then
